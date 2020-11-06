@@ -1,0 +1,10 @@
+const main = (): void => {
+let number: int = 21;
+if (n%2==0) {
+console_out(number + " is not prime");
+} else {
+for(let i: int = 3; i <= math_sqrt(n); i+=2) {
+if(n%i==0)
+console_out(number + " is not prime");
+} }
+console_out(number + " is prime"); }

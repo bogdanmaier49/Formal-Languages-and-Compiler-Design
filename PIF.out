@@ -1,0 +1,91 @@
+Symbol Table: 
+Symbol Table: 
+0: 2 
+1: main 3 "aismax" 
+2: "bismax" 
+3: "cismax" 
+4: void 
+5: else 
+6: 
+7: a 
+8: b 
+9: 1 c 
+Program Internal Form: 
+function | 0
+main | 1
+( | 0
+a | 7
+) | 0
+: | 0
+void | 4
+=> | 0
+{ | 0
+let | 0
+a | 7
+: | 0
+int | 0
+= | 0
+1 | 9
+; | 0
+let | 0
+b | 8
+: | 0
+int | 0
+= | 0
+2 | 0
+; | 0
+let | 0
+c | 9
+: | 0
+int | 0
+= | 0
+3 | 1
+; | 0
+if | 0
+( | 0
+a | 7
+> | 0
+b | 8
+&& | 0
+a | 7
+> | 0
+c | 9
+) | 0
+{ | 0
+console_out | 0
+( | 0
+"aismax" | 1
+} | 0
+else | 5
+if | 0
+( | 0
+b | 8
+> | 0
+a | 7
+&& | 0
+b | 8
+> | 0
+c | 9
+) | 0
+{ | 0
+console_out | 0
+( | 0
+"bismax" | 2
+} | 0
+else | 5
+if | 0
+( | 0
+c | 9
+> | 0
+a | 7
+&& | 0
+c | 9
+> | 0
+b | 8
+) | 0
+{ | 0
+console_out | 0
+( | 0
+"cismax" | 3
+} | 0
+} | 0

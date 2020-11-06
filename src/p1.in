@@ -1,0 +1,12 @@
+function main (a): void => {
+let a: int = 1;
+let b: int = 2;
+let c: int = 3;
+if (a  > b && a > c) {
+console_out( "a is max" );
+} else if (b > a && b > c) {
+console_out("b is max" );
+} else if (c > a && c > b) {
+console_out ("c is max" ) ;
+}
+}
