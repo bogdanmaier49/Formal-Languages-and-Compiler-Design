@@ -1,3 +1,3 @@
 # Formal-Languages-and-Compiler-Design
 ## Lab 2
-Symbol Table implementation in Java
+Lexical Analyzer implementation in Java, using the Symbol Table from lab 2
