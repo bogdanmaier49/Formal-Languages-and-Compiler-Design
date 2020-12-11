@@ -25,4 +25,9 @@ public class Element {
         this.productionNumber = val;
     }
 
+    @Override
+    public String toString() {
+        return value + productionNumber;
+    }
+
 }

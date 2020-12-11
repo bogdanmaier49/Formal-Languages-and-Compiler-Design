@@ -20,8 +20,12 @@ public class Main {
             Grammar grammar = new Grammar("/Users/bogdanmaier/Documents/faculta/Limbaje formale/lab5/src/g1.txt");
             Parser parser = new Parser(grammar);
             System.out.println(grammar);
-            System.out.println("PArse result for [aacbc]: " + parser.parse(Arrays.asList(new String[]{"a", "b", "c", "b", "c"})));
 
+            try {
+                System.out.println("Parse result for [aacbc]: " + parser.parse(Arrays.asList(new String[]{"a", "a", "c", "b", "c"})));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
 
             Scanner scanner = new Scanner(System.in);

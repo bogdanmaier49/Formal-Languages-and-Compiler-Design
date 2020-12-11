@@ -1,5 +1,6 @@
 package com.bogdanmaier;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -16,7 +17,7 @@ public class Parser {
         this.grammar = grammar;
     }
 
-    public boolean parse (List<String> sequence) {
+    public boolean parse (List<String> sequence) throws ParseException {
         currentState = State.NORMAL_STATE;
         positionIndex = 0;
         this.inputStack = new Stack<>();
@@ -29,24 +30,31 @@ public class Parser {
             if (currentState == State.NORMAL_STATE) {
                 if (inputStack.empty() && positionIndex == sequence.size()) {
                     success();
+                    printStep("success");
                 } else if (inputStack.empty()) {
                     momentaryInsuccess();
+                    printStep("momentary insuccess");
                 } else {
                     Element top = inputStack.peek();
                     if (grammar.isNonTerminal(top.getValue())) {
                         expand();
+                        printStep("expand");
                     } else if (positionIndex < sequence.size() && top.getValue().equals(sequence.get(positionIndex))) {
                         advance();
+                        printStep("advance");
                     } else {
                         momentaryInsuccess();
+                        printStep("momentary insuccess");
                     }
                 }
             } else if (currentState == State.BACK_STATE) {
                 Element top = workingStack.peek();
                 if (grammar.isNonTerminal(top.getValue())) {
                     anotherTry();
+                    printStep("another try");
                 } else {
                     back();
+                    printStep("back");
                 }
             }
 
@@ -57,6 +65,10 @@ public class Parser {
         }
 
         return true;
+    }
+
+    private void printStep (String step) {
+        System.out.println("|- " + step + " \n(" + currentState + ", " + positionIndex + ", " + workingStack + ", " + inputStack + ")");
     }
 
     private void expand () {
@@ -89,12 +101,11 @@ public class Parser {
         workingStack.pop();
     }
 
-    private void anotherTry () {
+    private void anotherTry () throws ParseException {
         Element element = workingStack.peek();
         if (positionIndex == 0 && element.getValue().equals(start.getValue())) {
-            System.out.println("Error: " + positionIndex + ", " + element.getValue() + ", " + element.getProductionNumber());
             currentState = State.ERROR_STATE;
-            return;
+            throw new ParseException("Error: at position index: " + positionIndex + ", at element: " + element.getValue() + ", with productionNumber: " + element.getProductionNumber());
         }
 
         workingStack.pop();
