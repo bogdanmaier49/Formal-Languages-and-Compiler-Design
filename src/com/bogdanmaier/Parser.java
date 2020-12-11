@@ -1,8 +1,6 @@
 package com.bogdanmaier;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Parser {
 
@@ -12,6 +10,7 @@ public class Parser {
     private int positionIndex;
     private String currentState;
     private Element start;
+    private List<Element> parseTreeOutput;
 
     public Parser (Grammar grammar) {
         this.grammar = grammar;
@@ -24,6 +23,7 @@ public class Parser {
         this.workingStack = new Stack<>();
         start = new Element(grammar.getStartSymbol());
         inputStack.push(start);
+        this.parseTreeOutput = new ArrayList<>();
 
         while (currentState != State.FINAL_STATE && currentState != State.ERROR_STATE) {
 
@@ -64,11 +64,24 @@ public class Parser {
             return false;
         }
 
+        // Set  the parse tree output
+        while(! workingStack.empty()) {
+            Element top = workingStack.pop();
+            if (grammar.isNonTerminal(top.getValue())) {
+                this.parseTreeOutput.add(top);
+            }
+        }
+        Collections.reverse(this.parseTreeOutput);
+
         return true;
     }
 
     private void printStep (String step) {
         System.out.println("|- " + step + " \n(" + currentState + ", " + positionIndex + ", " + workingStack + ", " + inputStack + ")");
+    }
+
+    public List<Element> getParseTreeOutput () {
+        return this.parseTreeOutput;
     }
 
     private void expand () {
@@ -105,7 +118,7 @@ public class Parser {
         Element element = workingStack.peek();
         if (positionIndex == 0 && element.getValue().equals(start.getValue())) {
             currentState = State.ERROR_STATE;
-            throw new ParseException("Error: at position index: " + positionIndex + ", at element: " + element.getValue() + ", with productionNumber: " + element.getProductionNumber());
+            throw new ParseException("at position index: " + positionIndex + ", at element: " + element.getValue() + ", with productionNumber: " + element.getProductionNumber());
         }
 
         workingStack.pop();

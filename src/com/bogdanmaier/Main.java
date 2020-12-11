@@ -23,6 +23,8 @@ public class Main {
 
             try {
                 System.out.println("Parse result for [aacbc]: " + parser.parse(Arrays.asList(new String[]{"a", "a", "c", "b", "c"})));
+                System.out.println("Parse tree: " + parser.getParseTreeOutput());
+                ParserOutput parserOutput = new ParserOutput(grammar, parser);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
