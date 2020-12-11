@@ -19,7 +19,8 @@ public class Main {
         try {
             Grammar grammar = new Grammar("/Users/bogdanmaier/Documents/faculta/Limbaje formale/lab5/src/g1.txt");
             Parser parser = new Parser(grammar);
-            System.out.println("PArse result for [aacbc]: " + parser.parse(Arrays.asList(new String[]{"a", "a", "c", "b", "c"})));
+            System.out.println(grammar);
+            System.out.println("PArse result for [aacbc]: " + parser.parse(Arrays.asList(new String[]{"a", "b", "c", "b", "c"})));
 
 
 

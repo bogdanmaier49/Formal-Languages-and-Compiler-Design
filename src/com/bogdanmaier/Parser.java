@@ -29,12 +29,9 @@ public class Parser {
             if (currentState == State.NORMAL_STATE) {
                 if (inputStack.empty() && positionIndex == sequence.size()) {
                     success();
+                } else if (inputStack.empty()) {
+                    momentaryInsuccess();
                 } else {
-                    if (inputStack.empty()) {
-                        momentaryInsuccess();
-                        continue;
-                    }
-
                     Element top = inputStack.peek();
                     if (grammar.isNonTerminal(top.getValue())) {
                         expand();

@@ -18,9 +18,9 @@ public class Grammar {
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
         String data = myReader.nextLine();
-        terminals = Arrays.asList(data.split(","));
-        data = myReader.nextLine();
         nonTerminals = Arrays.asList(data.split(","));
+        data = myReader.nextLine();
+        terminals = Arrays.asList(data.split(","));
         data = myReader.nextLine();
         startSymbol = data;
 
@@ -28,7 +28,7 @@ public class Grammar {
         while (myReader.hasNextLine()) {
             data = myReader.nextLine();
             String[] sData = data.strip().split("->");
-            Production production = new Production((sData[0]));
+            Production production = new Production((sData[0].trim()));
 
             String[] rightSide = sData[1].split("\\|");
             for (String rsi: rightSide) {
