@@ -7,40 +7,32 @@ public class Production {
 
     private String start;
 
-    private List<List<String>> results;
+    private List<List<String>> terminalsAndNonTerminals;
 
     public Production (String start) {
         this.start = start;
-        results = new ArrayList<>();
+        terminalsAndNonTerminals = new ArrayList<>();
     }
 
     public String getStart() {
         return start;
     }
 
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public List<List<String>> getResults() {
-        return results;
-    }
-
-    public void setResults(List<List<String>> results) {
-        this.results = results;
+    public List<List<String>> getTerminalsAndNonTerminals() {
+        return terminalsAndNonTerminals;
     }
 
     @Override
     public String toString () {
         StringBuilder sb = new StringBuilder();
-        sb.append(results.toString() + '\n');
+        sb.append(terminalsAndNonTerminals.toString() + '\n');
         sb.append(start);
         sb.append(" -> ");
-        for (int i = 0; i < results.size(); i++) {
-            for (String production : results.get(i)) {
+        for (int i = 0; i < terminalsAndNonTerminals.size(); i++) {
+            for (String production : terminalsAndNonTerminals.get(i)) {
                 sb.append(production);
             }
-            if (i < results.size() - 1)
+            if (i < terminalsAndNonTerminals.size() - 1)
                 sb.append(" | ");
         }
         return sb.toString();

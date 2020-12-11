@@ -77,10 +77,10 @@ public class Parser {
         workingStack.push(element);
         inputStack.pop();
 
-        List<List<String>> productionTerminals = grammar.findProduction(element.getValue()).getResults();
+        List<List<String>> terminalsAndNonTerminals = grammar.findProduction(element.getValue()).getTerminalsAndNonTerminals();
 
-        for (int i = productionTerminals.get(0).size() - 1; i >= 0; --i) {
-            String s = productionTerminals.get(0).get(i);
+        for (int i = terminalsAndNonTerminals.get(0).size() - 1; i >= 0; --i) {
+            String s = terminalsAndNonTerminals.get(0).get(i);
             inputStack.push(new Element(s));
         }
     }
@@ -109,21 +109,21 @@ public class Parser {
         }
 
         workingStack.pop();
-        List<List<String>> productionValues = grammar.findProduction(element.getValue()).getResults();
+        List<List<String>> terminalsAndNonTerminals = grammar.findProduction(element.getValue()).getTerminalsAndNonTerminals();
 
-        for (int i = 0; i < productionValues.get(element.getProductionNumber() - 1).size(); ++i) {
+        for (int i = 0; i < terminalsAndNonTerminals.get(element.getProductionNumber() - 1).size(); ++i) {
             inputStack.pop();
         }
 
-        if (productionValues.size() == element.getProductionNumber()) {
+        if (terminalsAndNonTerminals.size() == element.getProductionNumber()) {
             element.setProductionNumber(0);
             inputStack.push(element);
         } else {
             currentState = State.NORMAL_STATE;
             element.setProductionNumber(element.getProductionNumber() + 1);
             workingStack.push(element);
-            for (int i = productionValues.get(element.getProductionNumber() - 1).size() - 1; i >= 0; --i) {
-                String s = productionValues.get(element.getProductionNumber() - 1).get(i);
+            for (int i = terminalsAndNonTerminals.get(element.getProductionNumber() - 1).size() - 1; i >= 0; --i) {
+                String s = terminalsAndNonTerminals.get(element.getProductionNumber() - 1).get(i);
                 inputStack.push(new Element(s));
             }
         }

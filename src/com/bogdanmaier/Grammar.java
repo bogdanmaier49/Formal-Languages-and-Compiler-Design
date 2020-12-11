@@ -33,7 +33,7 @@ public class Grammar {
             String[] rightSide = sData[1].split("\\|");
             for (String rsi: rightSide) {
                 String[] productionElems = rsi.trim().split(" ");
-                production.getResults().add(Arrays.asList(productionElems));
+                production.getTerminalsAndNonTerminals().add(Arrays.asList(productionElems));
             }
             productions.add(production);
         }
