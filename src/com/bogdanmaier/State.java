@@ -1,5 +1,6 @@
 package com.bogdanmaier;
 
+// maybe could've used enums
 public class State {
 
     public static final String NORMAL_STATE = "q";

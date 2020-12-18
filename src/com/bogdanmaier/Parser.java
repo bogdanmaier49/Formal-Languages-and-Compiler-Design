@@ -25,6 +25,7 @@ public class Parser {
         inputStack.push(start);
         this.parseTreeOutput = new ArrayList<>();
 
+        // should use equals() instead of == when comparing strings
         while (currentState != State.FINAL_STATE && currentState != State.ERROR_STATE) {
 
             if (currentState == State.NORMAL_STATE) {

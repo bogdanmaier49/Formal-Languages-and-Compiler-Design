@@ -40,6 +40,7 @@ public class Grammar {
         myReader.close();
     }
 
+    // maybe could've used streams/predefined functions instead of explicit loops
     public Production findProduction (String nonTerminal) {
         for (Production production : productions) {
             if (production.getStart().equals(nonTerminal)) {
